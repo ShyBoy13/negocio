@@ -1,0 +1,31 @@
+.productos-gestion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.productos-gestion__form-contenido {
+  display: flex;
+  width: 100%;
+  max-width: 480px;
+  justify-content: center;
+  padding: 0rem 0.5rem;
+  padding-top: 1rem;
+  gap: 0.5rem;
+
+  &__input {
+    padding: 0.30rem;
+    outline: none;
+  }
+  &__nombre {
+    width: 60%;
+  }
+  &__precio {
+    width: 20%;
+  }
+  &__aceptar {
+    width: 20%;
+  }
+}

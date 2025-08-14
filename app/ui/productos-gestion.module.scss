@@ -1,0 +1,23 @@
+.gestion-contenido {
+  width: 100%;
+  max-width: 960px;
+  padding-top: 1rem;
+
+  &__cabecera {
+    font-weight: bold;
+    background-color: #3f3f3f;
+    color: #fff;
+    width: 100%;
+    display: flex;
+    &__nombre, &__precio {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    &__nombre {
+      width: 500%;
+    }
+    &__precio {
+      width: 300%;
+    }
+  }
+}
