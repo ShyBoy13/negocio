@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   user-select: none;
+  position: relative;
 
   &-nombre {
     width: 500%;
@@ -18,76 +19,89 @@
   }
 }
 
+.productos-buscar {
+  width: 100%;
+  padding: 0rem 1rem;
+  .producto-buscar {
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px dashed #dd4d4d;
+    &:active {
+      background-color: #eee;
+    }
+  }
+}
+
 .productos-gestion{
   display: flex;
   flex-direction: column;
-}
 
-.producto-gestion {
-  $borde-color: #999;
-  display: flex;
-  height: 100%;
-  border-bottom: 1px solid $borde-color;
-
-  &__nombre, &__precio, &__acciones {
-    padding: 0.25rem;
-    background-color: #fff;
-    border-collapse: collapse;
-    text-transform: uppercase;
-    border-left: 1px solid $borde-color;
+  .producto-gestion {
+    $borde-color: #999;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    &:last-child {
-      border-right: 1px solid $borde-color;
-    }
-  }
-  &__acciones {
-    .boton {
+    height: 100%;
+    border-bottom: 1px solid $borde-color;
+
+    &__nombre, &__precio, &__acciones {
+      padding: 0.25rem;
+      background-color: #fff;
+      border-collapse: collapse;
+      text-transform: uppercase;
+      border-left: 1px solid $borde-color;
       display: flex;
-      align-items: center;
       justify-content: center;
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      width: 1.5rem;
-      height: 1.5rem;
-      cursor: pointer;
+      align-items: center;
+      &:last-child {
+        border-right: 1px solid $borde-color;
+      }
+    }
+    &__acciones {
+      .boton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+      }
     }
   }
 }
 
-.producto-cuenta {
+.productos-cuenta {
   width: 100%;
-  border-bottom: 1px solid #999999;
-  background-color: #fff;
-  color: #000;
-  padding: 0rem 0.5rem;
-
-  :nth-child(-n + 2) {
-  }
-
-  &__nombre, &__precio, &__cantidad, &__acciones {
-    padding: 0.55rem 0rem;
-  }
-  &__precio {
-    width: 125%;
-    font-size: 1rem;
-    color: #007700;
-    text-align: center;
-  }
-  &__cantidad {
-    text-align: center;
+  padding: 0rem 1rem;
+  .producto-cuenta {
     width: 100%;
-    color: #3377ff;
-    font-size: 1rem;
-  }
-  &__acciones {
-    text-align: center;
-    width: 100%;
-  }
-}
+    border-bottom: 1px solid #999999;
+    background-color: #fff;
+    color: #000;
+    padding: 0rem 0.5rem;
 
-.producto-buscar {
+    :nth-child(-n + 2) {
+    }
 
+    &__nombre, &__precio, &__cantidad, &__acciones {
+      padding: 0.55rem 0rem;
+    }
+    &__precio {
+      width: 125%;
+      font-size: 1rem;
+      color: #007700;
+      text-align: center;
+    }
+    &__cantidad {
+      text-align: center;
+      width: 100%;
+      color: #3377ff;
+      font-size: 1rem;
+    }
+    &__acciones {
+      text-align: center;
+      width: 100%;
+    }
+
+  }
 }

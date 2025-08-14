@@ -1,10 +1,9 @@
 'use client'
-import { ReactElement, use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductosLista from '@/app/ui/productosLista'
 import { crearCuentaServidor } from '@/lib/cuentasManejador'
 import styles from './cobro.module.scss'
 
-type ProdcutosARG = (string | number)[]
 type ProductosListaTP = ProductoIF[]
 type ProductosCuentaTP = ProductoCuentaIF[]
 
@@ -25,45 +24,13 @@ export interface CuentaIF {
   total: number,
   fecha: Date,
 }
-
-const crearCuenta = (productos: ProductosListaTP): CuentaIF => {
-  let productosCuenta: ProductosCuentaTP = productos.map(producto => Object.assign({cantidad: 0}, producto))
-
-  return {
-    productos: productosCuenta,
-    total: 0,
-    fecha: new Date()
-  }
-}
-
-const crearProductoUnico = ([nombre, precio]: [string, number], productosLista: ProductosListaTP = []): ProductoIF  => {
-  return {
-    nombre: nombre,
-    precio: precio,
-  }
-}
-
-const crearProductos = (productos: ProdcutosARG) => {
-  let productosConvertidos: ProductoIF[] = [] 
-  for (let i=0; i<productos.length; i+=2) {
-    let [nombre, precio] = [productos[i], productos[i+1]]
-    if (typeof nombre === 'string' && typeof precio === 'number') {
-      productosConvertidos.push(crearProductoUnico([nombre, precio], productosConvertidos))
-    } else {
-      console.log('argumentos invalidos')
-      return [] 
-    }
-  }
-  return productosConvertidos
-}
-
 const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: CuentaIF, mandarCuenta: () => void, eliminarProducto: (productoId: string) => void}) => {
   const aceptarCuenta = () => {
     if (confirm('La cuenta es correcta?')) mandarCuenta()
   }
 
   const quitarProducto = (e: React.MouseEvent<HTMLButtonElement>) => {
-    let productoElem = e.target instanceof HTMLButtonElement && e.target.closest<HTMLElement>('#producto')
+    let productoElem = e.target instanceof HTMLButtonElement && e.target.closest<HTMLElement>('[data-id]')
     if (productoElem && productoElem.dataset.id) {
       eliminarProducto(productoElem.dataset.id)
     } else {
@@ -103,7 +70,7 @@ const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: Cuenta
       <div className={styles['cuenta-total']}>
         { cuenta.productos.length > 0 ? <span>Total: {cuenta.total}</span> : undefined}
       </div>
-      <ProductosLista productos={cuenta.productos} tipoProductos='cuenta' componenteAcciones={<button onClick={quitarProducto} id="producto-quitar-btn" className={styles['producto-quitar-btn']}>—</button>} />
+      <ProductosLista productos={cuenta.productos} tipoProductos='cuenta' componenteAcciones={<button onClick={quitarProducto} id="producto-cuenta-quitar" className={styles['producto-cuenta-quitar']}>—</button>} />
       <div className={styles['cuenta-cambio-contenido']}>
         <label htmlFor="cuenta-monto">
           Monto: 
@@ -125,6 +92,7 @@ export const BuscarProductos = ({productos, actualizarCuentaProductos}: {product
   }
 
   const ponerCuentaProductos = (e: React.PointerEvent<HTMLDivElement>) => {
+    console.log('producto click', e.target)
     if (e.target instanceof HTMLElement) {
       let producto = e.target.closest<HTMLElement>('[data-id]')
       if ( producto && producto.dataset.id) {
@@ -138,7 +106,7 @@ export const BuscarProductos = ({productos, actualizarCuentaProductos}: {product
       <div className={styles['buscar-producto-form']}>
         <input onChange={buscarProducto} className={styles['buscar-producto-texto']} type="text" placeholder='Buscar producto'/>
       </div>
-      <ProductosLista productos={productos} tipoProductos='buscar'/>
+      <ProductosLista productos={productosLista} tipoProductos='buscar' productoClick={ponerCuentaProductos}/>
     </section>
   )
 }

@@ -10,12 +10,13 @@ export interface ProductoIF {
   precio: number
 }
 
-function Producto ({producto, cantidad = undefined, productoTipo, componenteAcciones}: 
+function Producto ({producto, cantidad = undefined, productoTipo, productoClick ,componenteAcciones}: 
   {
     producto: ProductoIF,
     cantidad?: number,
     productoTipo?: string,
-    componenteAcciones?: React.ReactElement 
+    productoClick?: (e: React.PointerEvent<HTMLDivElement>) => void,
+    componenteAcciones?: React.ReactElement,
   }
   ) {
     const claseBase = 'producto'
@@ -36,7 +37,7 @@ function Producto ({producto, cantidad = undefined, productoTipo, componenteAcci
     }
 
     return (
-      <article className={clsx(styles[claseBase], claseProducto, styles[claseBase+'--'+'seleccionado'])}>
+      <article onClick={productoClick} data-id={producto._id}className={clsx(styles[claseBase], claseProducto, styles[claseProducto+'--'+'seleccionado'])}>
         <div className={clsx(styles[claseBase+'-nombre'], claseNombre)}>{producto.nombre}</div>
         {typeof cantidad === 'number' ? <div className={clsx(claseCantidad)}>{cantidad}</div> : cantidad} 
         <div className={clsx(styles[claseBase+'-precio'], clasePrecio)}>{typeof cantidad === 'number' ? cantidad*producto.precio: producto.precio}</div>
@@ -45,14 +46,16 @@ function Producto ({producto, cantidad = undefined, productoTipo, componenteAcci
     )
 }
 
-export default function ProductosLista ({productos, tipoProductos, componenteAcciones}: {
+export default function ProductosLista ({productos, tipoProductos, componenteAcciones, productoClick}: {
     productos: ProductoIF[],
     tipoProductos?: 'cuenta'|'gestion'|'buscar',
-    componenteAcciones?: ReactElement
+    productoClick?: (e: React.PointerEvent<HTMLDivElement>) => void,
+    componenteAcciones?: ReactElement,
+    
   }) {
   return (
     <section className={clsx(styles['productos-lista'], styles['productos-'+tipoProductos])}>
-        {productos.map((producto, i) => <Producto key={i} producto={producto} cantidad={producto.cantidad} productoTipo={tipoProductos} componenteAcciones={componenteAcciones}/>)}
+        {productos.map((producto, i) => <Producto key={i} producto={producto} cantidad={producto.cantidad} productoTipo={tipoProductos} productoClick={productoClick} componenteAcciones={componenteAcciones}/>)}
     </section>
   )
 }
