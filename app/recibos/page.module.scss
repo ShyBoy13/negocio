@@ -1,3 +1,17 @@
+.total-ventas {
+  background-color: #ccc;
+  padding: 0.5rem;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  .total-ventas__cantidad {
+    text-decoration: underline;
+    letter-spacing: 1px;
+  } 
+
+}
+
 .recibos-lista {
   display: flex;
   flex-direction: column;

@@ -6,8 +6,12 @@ import clsx from 'clsx'
 export default async function Page() {
   const claseBase = 'recibos-lista'
   const cuentas = await obtener('negocio', 'cuentas')
+  // Para despues -> filtrar por fechas
   return (
     <article className={clsx(styles[claseBase])}>
+      <div className={clsx(styles['total-ventas'])}>
+        <p>Total ventas: <span className={clsx(styles['total-ventas__cantidad'])}>{cuentas.reduce((totalVendido: number, cuenta: CuentaIF) => {return totalVendido + cuenta.total}, 0)}</span></p>
+      </div>
       {
         cuentas.map((cuenta: CuentaIF) => {
           return (

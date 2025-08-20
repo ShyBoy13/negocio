@@ -11,6 +11,7 @@ export default async function Home() {
           <Link href="/cobro">Cobro</Link>
           <Link href="/recibos">Recibos</Link>
           <Link href="/productos">Productos</Link>
+          <Link href="/gastos">Gastos</Link>
         </div>
       </main>
     )
