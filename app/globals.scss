@@ -1,6 +1,8 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050505;
+  --foreground: #ffffff;
+  //--background: #ffffff;
+  //--foreground: #171717;
 }
 
 /*
@@ -42,10 +44,4 @@ a {
 
 span, button, input[type="button"] {
   display: inline-block;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

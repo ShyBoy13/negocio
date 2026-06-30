@@ -1,5 +1,7 @@
+@use '@/app/ui/colores';
+
 .total-ventas {
-  background-color: #ccc;
+  background-color: colores.$baseD1;
   padding: 0.5rem;
   width: 100%;
   font-weight: 600;
@@ -22,7 +24,7 @@
   &__recibo {
     max-width: 480px;
     width: 100%;
-    border: 2px solid #ccc;
+    border: 1px solid colores.$baseD1;
     padding: 0.5rem;
 
     &__informacion {
@@ -46,7 +48,8 @@
       &__cabecera {
         font-weight: 600;
         padding: 0.25rem;
-        background-color: #f0f0f0;
+        background-color: #232729;
+        background-color: colores.$secundarioN1;
 
         &__nombre {
           width: 60%;
@@ -65,7 +68,7 @@
         padding: 0.45rem 0.35rem;
         display: flex;
         text-transform: capitalize;
-        border-bottom: 1px solid #bbb;
+        border-bottom: 1px dashed colores.$base;
 
         &:last-child {
           border-bottom: none;
@@ -81,12 +84,12 @@
         &__precio {
           width: 30%;
           text-align: center;
-          color: green;
+          color: #8BFF8B;
         }
         &__cantidad {
           text-align: center;
           width: 10%; 
-          color: blue;
+          color: #338bff;
         }
       }
       

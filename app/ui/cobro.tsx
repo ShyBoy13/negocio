@@ -24,6 +24,7 @@ export interface CuentaIF {
   total: number,
   fecha: Date,
 }
+
 const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: CuentaIF, mandarCuenta: () => void, eliminarProducto: (productoId: string) => void}) => {
   const aceptarCuenta = () => {
     if (confirm('La cuenta es correcta?')) mandarCuenta()
@@ -62,24 +63,26 @@ const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: Cuenta
         cambioElem.textContent = (parseInt(cuentaMontoElem.value)-cuenta.total).toFixed(2)
       }
     }
+    console.log(cuenta.productos.length)
     console.log('Cuenta actualizada:', cuenta)
   }, [cuenta])
 
   return (
-    <section className={styles['cuenta-productos-cont']}> 
+    <section className={styles['cuenta-cont']}> 
+      <div className={styles['cuenta-productos-cont']}>
+        <ProductosLista productos={cuenta.productos} tipoProductos='cuenta' componenteAcciones={<button onClick={quitarProducto} id="producto-cuenta-quitar" className={styles['producto-cuenta-quitar']}>—</button>} />
+      </div>
       <div className={styles['cuenta-total']}>
-        { cuenta.productos.length > 0 ? <span>Total: {cuenta.total}</span> : undefined}
+        <span>Total: {cuenta.productos.length > 0 ? cuenta.total : 0}</span>
       </div>
-      <ProductosLista productos={cuenta.productos} tipoProductos='cuenta' componenteAcciones={<button onClick={quitarProducto} id="producto-cuenta-quitar" className={styles['producto-cuenta-quitar']}>—</button>} />
-      <div className={styles['cuenta-cambio-contenido']}>
-        <label htmlFor="cuenta-monto">
-          Monto: 
-          <input onChange={calcularCambio} className={styles['cuenta-pago']} type="number" name="" id="cuenta-monto" />
-        </label>
-        <span>Cambio: </span>
-        <output id='cambio'></output>
+      <div className={styles['cuenta-cambio']}>
+        <div className={styles['cuenta-cambio-contenido']}>
+          <input onChange={calcularCambio} placeholder='Pago' className={styles['cuenta-pago']} type="number" name="" id="cuenta-monto" />
+          <span>Cambio: </span>
+          <output id='cambio'></output>
+        </div>
       </div>
-      { cuenta.productos.length > 0 ? <button className={styles['cuenta-aceptar']} onClick={aceptarCuenta}>Aceptar</button> : undefined}
+      <button className={styles['cuenta-aceptar']} disabled={cuenta.productos.length == 0} onClick={aceptarCuenta}>Aceptar</button>
     </section>
   )
 }

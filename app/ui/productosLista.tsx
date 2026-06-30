@@ -37,7 +37,7 @@ function Producto ({producto, cantidad = undefined, productoTipo, productoClick 
     }
 
     return (
-      <article onClick={productoClick} data-id={producto._id}className={clsx(styles[claseBase], claseProducto, styles[claseProducto+'--'+'seleccionado'])}>
+      <article onClick={productoClick} data-id={producto._id} data-tipo-producto={productoTipo} className={clsx(styles[claseBase], claseProducto, styles[claseProducto+'--'+'seleccionado'])}>
         <div className={clsx(styles[claseBase+'-nombre'], claseNombre)}>{producto.nombre}</div>
         {typeof cantidad === 'number' ? <div className={clsx(claseCantidad)}>{cantidad}</div> : cantidad} 
         <div className={clsx(styles[claseBase+'-precio'], clasePrecio)}>{typeof cantidad === 'number' ? cantidad*producto.precio: producto.precio}</div>
@@ -53,6 +53,9 @@ export default function ProductosLista ({productos, tipoProductos, componenteAcc
     componenteAcciones?: ReactElement,
     
   }) {
+  // Cuando se utilice este componente se le tiene que poner un padre para poner espacios y colores del fondo.
+  // Para modificar cosas generales de los productos se usa el atributo data-tipo-producto con el valor del tipo de producto [gestion, cuenta, buscar] de segun la propiedad productoTipo del componente
+    // tambien se puede dejar vacio
   return (
     <section className={clsx(styles['productos-lista'], styles['productos-'+tipoProductos])}>
         {productos.map((producto, i) => <Producto key={i} producto={producto} cantidad={producto.cantidad} productoTipo={tipoProductos} productoClick={productoClick} componenteAcciones={componenteAcciones}/>)}

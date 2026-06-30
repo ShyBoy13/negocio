@@ -1,9 +1,11 @@
+@use '@/app/ui/colores';
+
 .cobro-app {
   height: 100%;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   & > * {
     max-width: 480px;
@@ -12,12 +14,36 @@
 }
 
 .buscar-productos-cont {
-  max-height: 30%;
-  overflow: hidden;
+  max-height: 40%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem 0rem;
+  background-color: colores.$baseD3;
+  padding: 1.5rem;
+  border-bottom: 1px solid colores.$base;
+  $borde-producto-vertical: 2px dashed colores.$secundario;
+  $borde-producto-horizontal: 2px dashed colores.$secundario;
+  [data-tipo-producto="buscar"] {
+    //white-space: nowrap;
+    justify-content: center;
+    font-size: 1.25em;
+    padding: 1rem 0rem;
+    padding-left: 1rem;
+    border-bottom: $borde-producto-vertical;
+    border-left: $borde-producto-horizontal; border-right: $borde-producto-horizontal;
+    &:nth-child(odd) {
+      background-color: colores.$baseD1;
+    }
+    &:hover {
+      text-decoration: underline;
+      color: colores.$secundario;
+      text-decoration-color: colores.$secundario;
+    }
+    &:first-child {
+      border-top: $borde-producto-vertical;
+    }
+  }
 }
 
 .buscar-producto-form {
@@ -28,57 +54,68 @@
 }
 
 .buscar-producto-texto {
-  outline: none;
+  background-color: #33393b;
+  border: none;
   text-align: center;
   width: 95%;
   padding: 0.4rem;
   font-size: 1.15rem;
 }
 
-.productos-cont {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  padding: 0rem 1rem;
-}
-
-.cuenta-productos-cont {
+.cuenta-cont {
   display: flex;
-  height: 70%;
+  max-height: 60%;
+  height: 60%;
   flex-direction: column;
   align-items: center;
-}
-
-.cuenta-productos {
-  display: grid;
-  width: 95%;
-  padding: 0.75rem 0rem;
-  overflow: auto;
+  background-color: colores.$baseD3;
+  padding: 1.5rem;
 }
 
 .cuenta-total {
-  width: 95%;
+  width: 100%;
   text-align: center;
-  padding: 0.5rem;
+  padding-top: 1rem;
   span {
     display: inline-block;
     width: 100%;
     padding: 0.5rem;
-    background-color: #ff0044;
+    background-color: colores.$secundario;
     color: #fff;
   }
 }
 
-.cuenta-cambio-contenido {
-  display: flex;
-  justify-content: space-around;
+.cuenta-productos-cont {
   width: 100%;
-  padding: 0.5rem 1rem;
-  align-items: center;
+  overflow: auto;
+  height: 65%;
+
+  [data-tipo-producto="cuenta"] {
+    padding: 0.3rem 0.75rem;
+    font-size: 1.15em;
+    background-color: colores.$baseD4;
+    border-bottom: 1px solid colores.$base;
+    justify-content: space-between;
+    color: colores.$secundario2;
+  }
+}
+
+.cuenta-cambio {
+  background-color: colores.$baseD3;
+  width: 100%;
+  padding: 2rem 0rem;
+  .cuenta-cambio-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.15rem;
+  }
   .cuenta-pago {
     width: 50%;
-    font-weight: 600;
+    background: colores.$baseD1;
+    color: colores.$texto;
+    font-size: 1.15rem;
+    border: none;
     padding: 0.25rem;
     text-align: center;
   }
@@ -86,14 +123,34 @@
 
 .cuenta-aceptar {
   padding: 0.5rem;
-  width: 95%;
+  width: 100%;
   text-align: center;
-  margin: 0.5rem 0rem;
+  margin: 0rem 0rem;
+  color: #fff;
+  background: colores.$baseD1;
+  &:hover {
+    background: colores.$base;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  border: none;
 }
 
 .producto-cuenta-quitar {
   border: none;
-  padding: 0.15rem;
-  background-color: #ddd;
-  color: #ee0000;
+  padding: 0.15rem 0.20rem;
+  background-color: colores.$baseD1;
+  color: colores.$secundario;
+  &:hover {
+    background: colores.$base;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .cobro-app {
+    max-height: 200vh;
+    height: 200%;
+  }  
 }

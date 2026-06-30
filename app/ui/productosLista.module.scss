@@ -1,17 +1,25 @@
+@use '@/app/ui/colores';
+
 .producto {
   display: flex;
   width: 100%;
+  -webkit-user-select: none;
   user-select: none;
   position: relative;
+  overflow: hidden;
 
   &-nombre {
-    width: 500%;
+    width: 100%;
+    display: flex;
+    align-items: center;
     text-transform: capitalize;
   }
 
   &-precio {
+    display: inline-flex;
+    align-items: center;
     text-align: right;
-    width: 100%;
+    padding: 0rem 1rem;
 
     &::before {
       content: '$';
@@ -21,14 +29,8 @@
 
 .productos-buscar {
   width: 100%;
-  padding: 0rem 1rem;
-  .producto-buscar {
-    padding: 0.5rem 0.25rem;
-    border-bottom: 1px dashed #dd4d4d;
-    &:active {
-      background-color: #eee;
-    }
-  }
+  height: 100%;
+  overflow: auto;
 }
 
 .productos-gestion{
@@ -36,14 +38,15 @@
   flex-direction: column;
 
   .producto-gestion {
-    $borde-color: #999;
+    $borde-color: colores.$base;
+    background: colores.$baseD3;
+    color: colores.$texto;
     display: flex;
     height: 100%;
     border-bottom: 1px solid $borde-color;
 
     &__nombre, &__precio, &__acciones {
       padding: 0.25rem;
-      background-color: #fff;
       border-collapse: collapse;
       text-transform: uppercase;
       border-left: 1px solid $borde-color;
@@ -53,6 +56,10 @@
       &:last-child {
         border-right: 1px solid $borde-color;
       }
+    }
+    &__nombre {
+      -webkit-user-select: text;
+      user-select: text;
     }
     &__acciones {
       .boton {
@@ -72,36 +79,36 @@
 
 .productos-cuenta {
   width: 100%;
-  padding: 0rem 1rem;
   .producto-cuenta {
     width: 100%;
-    border-bottom: 1px solid #999999;
-    background-color: #fff;
-    color: #000;
-    padding: 0rem 0.5rem;
-
-    :nth-child(-n + 2) {
-    }
 
     &__nombre, &__precio, &__cantidad, &__acciones {
-      padding: 0.55rem 0rem;
+      padding: 0.5rem 0rem;
+      display: inline-flex;
+      align-items: center;
     }
+
+    &__nombre {
+      width: 75%;
+    }
+
     &__precio {
-      width: 125%;
       font-size: 1rem;
-      color: #007700;
+      //padding: 0rem 1rem;
+      padding-right: 0.75rem;
+      color: colores.$precio;
       text-align: center;
     }
     &__cantidad {
       text-align: center;
-      width: 100%;
-      color: #3377ff;
+      //padding: 0rem 0.5rem;
+      padding: 0rem 0.75rem;
+      text-align: left;
+      color: colores.$cantidad;
       font-size: 1rem;
     }
     &__acciones {
       text-align: center;
-      width: 100%;
     }
-
   }
 }

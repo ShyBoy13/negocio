@@ -10,7 +10,7 @@ export default async function autenticar(credencialesForm: FormData) {
   const cookiesStore = await cookies()
   let credenciales
 
-  console.log('jamas se ejecuta esto')
+  //console.log('jamas se ejecuta esto')
   if ( nombre && clave)  {
     if (nombre === 'admin' && clave === 'R10S4SR3YK1R0') {
       credenciales = btoa(JSON.stringify({
@@ -25,7 +25,7 @@ export default async function autenticar(credencialesForm: FormData) {
         permiso: 'usuario'
       }))
     }
-    console.log('credenciales', credenciales)
+    //console.log('credenciales', credenciales)
     cookiesStore.set('credenciales', credenciales , {
       httpOnly: true,
       secure: false,
@@ -39,10 +39,9 @@ export const verificar = cache(async () => {
   const cookie = (await cookies()).get('credenciales')?.value
   const session = cookie ? JSON.parse(atob(cookie)) : null
   console.log('verificar', session)
- 
-  if (!session) {
-    return { isAuth: false, user: null}
+
+  if (session) {
+    return { isAuth: true, user: session }
   }
- 
-  return { isAuth: true, user: session }
+  return { isAuth: false, user: null}
 })

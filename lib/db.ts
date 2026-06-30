@@ -32,7 +32,7 @@ export async function obtener (basedatos: string, coleccion: string, filtro: any
     })
     return productos;
   } catch (error) {
-    return []
+    return [error]
   } finally {
     await cliente.close()
   }

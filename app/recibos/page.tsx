@@ -22,7 +22,7 @@ export default async function Page() {
               </div>
               <div className={clsx(styles[claseBase+'__recibo__productos'])}>
                 <div className={clsx(styles[claseBase+'__recibo__productos__cabecera'])}>
-                  <span className={clsx(styles[claseBase+'__recibo__productos__cabecera__nombre'])}>Producto</span>
+                  <span className={clsx(styles[claseBase+'__recibo__productos__cabecera__nombre'])}>Productos</span>
                   <span className={clsx(styles[claseBase+'__recibo__productos__cabecera__precio'])}>Precio</span>
                   <span className={clsx(styles[claseBase+'__recibo__productos__cabecera__cantidad'])}>C.</span>
                 </div>
