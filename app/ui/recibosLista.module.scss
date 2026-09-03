@@ -21,72 +21,82 @@
   gap: 1rem;
   align-items: center;
 
-  &__recibo {
+  .recibo {
     max-width: 480px;
     width: 100%;
     border: 1px solid colores.$baseD1;
+    border: 1px solid colores.$base;
     padding: 0.5rem;
+    position: relative;
 
-    &__informacion {
+    .borrar {
+      padding: 1px 15px;
+      background-color: colores.$secundarioN1;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .informacion {
       font-weight: 600;
       display: flex;
       justify-content: space-between;
       padding: 0.75rem 0.5rem;
 
-      &__fecha {
+      .fecha {
         width: 75%;
         text-align: left;
       }
 
-      &__total {
+      .total {
         width: 25%;
         text-align: center;
+        color: colores.$secundario2;
       }
     }
 
-    &__productos {
-      &__cabecera {
+    .productos {
+      .cabecera {
         font-weight: 600;
         padding: 0.25rem;
-        background-color: #232729;
-        background-color: colores.$secundarioN1;
+        background-color: colores.$base;
 
-        &__nombre {
+        .nombre {
           width: 60%;
         }
-        &__precio {
+        .precio {
           text-align: center;
           width: 30%;
         }
-        &__cantidad {
+        .cantidad {
           text-align: center;
           width: 10%;
         }
       }
 
-      &__producto {
+      .producto {
         padding: 0.45rem 0.35rem;
         display: flex;
         text-transform: capitalize;
         border-bottom: 1px dashed colores.$base;
 
-        &:last-child {
+        :last-child {
           border-bottom: none;
         }
 
-        &__nombre {
+        .nombre {
           width: 60%;
           i {
             letter-spacing: 1px;
           }
         }
 
-        &__precio {
+        .precio {
           width: 30%;
           text-align: center;
           color: #8BFF8B;
         }
-        &__cantidad {
+        .cantidad {
           text-align: center;
           width: 10%; 
           color: #338bff;

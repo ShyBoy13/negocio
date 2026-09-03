@@ -1,5 +1,4 @@
-import {obtener} from '@/lib/db'
-import { crearProductoServidor, eliminarProductoServidor } from '@/lib/productosAcciones'
+import { crearProductoServidor, obtenerProductoServidor} from '@/lib/productosAcciones'
 import ProductosGestion from '@/app/ui/productos-gestion'
 import styles from './page.module.scss'
 import clsx from 'clsx'
@@ -16,7 +15,7 @@ const CrearProducto = () => {
 }
  
 export default async function ProductosApp() {
-  const productos: any[] = await obtener('negocio', 'productos')
+  const productos: any[] = await obtenerProductoServidor()
   const claseBase = 'productos-gestion'
   console.log('productos', productos)
   return (

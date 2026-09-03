@@ -1,4 +1,6 @@
 @use '@/app/ui/colores';
+// Ver si es mejor tener este css para darle estilo a todos los tipos de lista 
+  // (ya que este css y el archivo tsx que lo utiliza funcionan para generar cualquier tipo de lista de productos a ser utilizada) o separarlos
 
 .producto {
   display: flex;
@@ -33,7 +35,7 @@
   overflow: auto;
 }
 
-.productos-gestion{
+.productos-gestion {
   display: flex;
   flex-direction: column;
 
@@ -44,35 +46,37 @@
     display: flex;
     height: 100%;
     border-bottom: 1px solid $borde-color;
+    
+    &:hover {
+      filter: brightness(0.80);
+    }
 
     &__nombre, &__precio, &__acciones {
-      padding: 0.25rem;
       border-collapse: collapse;
       text-transform: uppercase;
       border-left: 1px solid $borde-color;
       display: flex;
-      justify-content: center;
-      align-items: center;
       &:last-child {
         border-right: 1px solid $borde-color;
       }
     }
     &__nombre {
+      padding: 0.25rem;
+      width: 80%;
+      padding: 10px 10px;
       -webkit-user-select: text;
       user-select: text;
     }
+    &__precio {
+      padding: 0.25rem;
+      width: 16%;
+      font-size: 1rem;
+      justify-content: center;
+      color: colores.$precio;
+    }
     &__acciones {
-      .boton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ff4d4d;
-        color: white;
-        border: none;
-        width: 1.5rem;
-        height: 1.5rem;
-        cursor: pointer;
-      }
+      justify-content: center;
+      width: 4%;
     }
   }
 }

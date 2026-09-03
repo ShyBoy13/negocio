@@ -4,7 +4,7 @@ import ProductosLista from '@/app/ui/productosLista'
 import { crearCuentaServidor } from '@/lib/cuentasManejador'
 import styles from './cobro.module.scss'
 
-type ProductosListaTP = ProductoIF[]
+//type ProductosListaTP = ProductoIF[]
 type ProductosCuentaTP = ProductoCuentaIF[]
 
 export interface ProductoIF {

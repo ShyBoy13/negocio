@@ -1,24 +1,22 @@
 'use server'
 
-import db from '@/lib/db'
+import {insertar, eliminar, obtener} from '@/lib/db'
+import { revalidatePath } from 'next/cache'
+
 export async function crearCuentaServidor(cuenta: {productos: any[], total: number, fecha: Date }) {
-  try {
-    await db.connect()
-    const basedatos = db.db('negocio')
-    const cuentas = basedatos.collection('cuentas')
-    const resultado = await cuentas.insertOne(cuenta)
-    console.log('Cuenta creada:', resultado)
-  } catch (error) {
-    console.error('Error al crear la cuenta:', error)
-  } finally {
-    await db.close()
-  }
-}
- 
-export async function deletePost(formData: FormData) {
-  const id = formData.get('id')
+  await insertar('negocio', 'cuentas', cuenta)
+  revalidatePath('/recibos')
 }
 
+export async function obtenerCuentasServidor() {
+  return await obtener('negocio', 'cuentas')
+} 
+
+export async function eliminarCuentaServidor(id: string) {
+  if (!id && id === '') return
+  await eliminar('negocio', 'cuentas', id)
+  revalidatePath('/recibos')
+}
 
   // Update data
   // Revalidate cache

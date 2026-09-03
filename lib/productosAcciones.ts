@@ -1,6 +1,10 @@
 'use server'
-import {insertar, eliminar} from '@/lib/db'
+import {insertar, eliminar, obtener} from '@/lib/db'
 import { revalidatePath } from 'next/cache'
+
+export async function obtenerProductoServidor() {
+  return await obtener('negocio', 'productos')
+}
 
 export async function crearProductoServidor(producto:FormData) {
   const productoNuevo = {
@@ -10,6 +14,7 @@ export async function crearProductoServidor(producto:FormData) {
   await insertar('negocio', 'productos', productoNuevo)
   revalidatePath('/productos')
 }
+
 
 export async function eliminarProductoServidor(id: string) {
   if (!id && id === '') return
