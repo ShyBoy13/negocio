@@ -2,7 +2,7 @@
 import {insertar, eliminar, obtener} from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 
-export async function obtenerProductoServidor() {
+export async function obtenerProductosServidor() {
   return await obtener('negocio', 'productos')
 }
 

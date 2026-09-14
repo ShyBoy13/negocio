@@ -4,6 +4,7 @@ import styles from './recibosLista.module.scss'
 import clsx from 'clsx';
 import React from 'react';
 import { eliminarCuentaServidor } from '@/lib/cuentasManejador';
+import Link from 'next/link';
 
 export default function RecibosLista({cuentas}: {cuentas: CuentaIF[]}) {
   const borrarRecibo = (e: React.PointerEvent<HTMLElement>) => {
@@ -16,6 +17,7 @@ export default function RecibosLista({cuentas}: {cuentas: CuentaIF[]}) {
       <div className={clsx(styles['total-ventas'])}>
         <p>Total ventas: <span className={clsx(styles['total-ventas__cantidad'])}>{cuentas.reduce((totalVendido: number, cuenta: CuentaIF) => {return totalVendido + cuenta.total}, 0)}</span></p>
       </div>
+      <Link href="/">Inicio</Link>
       <section className={styles["recibos-lista"]}>
         {
           cuentas.map((cuenta: CuentaIF) => {

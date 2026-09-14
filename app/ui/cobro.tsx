@@ -3,23 +3,10 @@ import { useEffect, useState } from 'react'
 import ProductosLista from '@/app/ui/productosLista'
 import { crearCuentaServidor } from '@/lib/cuentasManejador'
 import styles from './cobro.module.scss'
-
-//type ProductosListaTP = ProductoIF[]
-type ProductosCuentaTP = ProductoCuentaIF[]
-
-export interface ProductoIF {
-  _id?: string,
-  nombre: string,
-  precio: number
-
-}
-
-interface ProductoCuentaIF extends ProductoIF {
-  cantidad: number
-}
+import type { Productos } from '../types'
 
 export interface CuentaIF {
-  productos: ProductosCuentaTP,
+  productos: Productos,
   _id?: string,
   total: number,
   fecha: Date,
@@ -70,7 +57,7 @@ const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: Cuenta
   return (
     <section className={styles['cuenta-cont']}> 
       <div className={styles['cuenta-productos-cont']}>
-        <ProductosLista productos={cuenta.productos} tipoProductos='cuenta' componenteAcciones={<button onClick={quitarProducto} id="producto-cuenta-quitar" className={styles['producto-cuenta-quitar']}>—</button>} />
+        <ProductosLista productos={cuenta.productos} props={{productoTipo: 'cuenta', componenteAcciones: <button onClick={quitarProducto} id="producto-cuenta-quitar" className={styles['producto-cuenta-quitar']}>—</button>}}  />
       </div>
       <div className={styles['cuenta-total']}>
         <span>Total: {cuenta.productos.length > 0 ? cuenta.total : 0}</span>
@@ -87,7 +74,7 @@ const CuentaCliente = ({cuenta, mandarCuenta, eliminarProducto}: {cuenta: Cuenta
   )
 }
 
-export const BuscarProductos = ({productos, actualizarCuentaProductos}: {productos: ProductoIF[], actualizarCuentaProductos: (productoId: string) => void}) => {
+export const BuscarProductos = ({productos, actualizarCuentaProductos}: {productos: Productos, actualizarCuentaProductos: (productoId: string) => void}) => {
   const [productosLista, ponerProductos] = useState(productos)
 
   const buscarProducto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,12 +96,12 @@ export const BuscarProductos = ({productos, actualizarCuentaProductos}: {product
       <div className={styles['buscar-producto-form']}>
         <input onChange={buscarProducto} className={styles['buscar-producto-texto']} type="text" placeholder='Buscar producto'/>
       </div>
-      <ProductosLista productos={productosLista} tipoProductos='buscar' productoClick={ponerCuentaProductos}/>
+      <ProductosLista productos={productosLista} props={{productoTipo:'busqueda', productoClick: ponerCuentaProductos}} />
     </section>
   )
 }
 
-export default function CobroApp ({productos}: {productos: ProductoIF[]}) {
+export default function CobroApp ({productos}: {productos: Productos}) {
   const productosLista = productos
   const cuentaVacia = {productos: [], fecha: new Date(), total: 0}
   const [cuentaProductos, ponerCuentaProductos] = useState<CuentaIF>(cuentaVacia)
@@ -123,12 +110,12 @@ export default function CobroApp ({productos}: {productos: ProductoIF[]}) {
     let cuentaProductosObj = Object.assign({}, cuentaProductos)
     let producto = productosLista.find(producto => producto._id === productoId)
     let productoRepetido = cuentaProductosObj.productos.find(productoObj => productoObj._id == producto?._id)
-    if (productoRepetido) {
+    if ( productoRepetido) {
       productoRepetido.cantidad+=1
     } else {
       cuentaProductosObj.productos.push(Object.assign({cantidad: 1}, producto))
     }
-    cuentaProductosObj.total = cuentaProductosObj.productos.reduce((total, producto) =>  total + producto.precio * producto.cantidad, 0)
+    cuentaProductosObj.total = cuentaProductosObj.productos.reduce((total, producto) =>  total + producto.precio * producto.cantidad , 0)
     ponerCuentaProductos(cuentaProductosObj)
   }
 

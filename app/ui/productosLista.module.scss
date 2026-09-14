@@ -3,43 +3,61 @@
   // (ya que este css y el archivo tsx que lo utiliza funcionan para generar cualquier tipo de lista de productos a ser utilizada) o separarlos
 
 .producto {
-  display: flex;
-  width: 100%;
   -webkit-user-select: none;
   user-select: none;
-  position: relative;
-  overflow: hidden;
+  text-transform: capitalize;
+  color: colores.$texto;
 
-  &-nombre {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-  }
-
-  &-precio {
-    display: inline-flex;
-    align-items: center;
-    text-align: right;
-    padding: 0rem 1rem;
-
+  .precio {
     &::before {
       content: '$';
     }
   }
 }
 
-.productos-buscar {
-  width: 100%;
+
+
+.productos-busqueda {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
+  position: relative;
   overflow: auto;
+
+  .producto {
+    display: flex;
+    width: 100%;
+    font-size: 1.25em;
+    padding: 10px;
+    &:hover {
+      color: colores.$secundario2;
+    }
+  }
+  .subrayado-completo:empty {
+    border-bottom: 1px dashed colores.$precio;
+    display: block;
+    position: relative;
+    top: -50%;
+    flex-grow: 50;
+  }
+  .nombre {
+    flex-grow: 2;
+  }
+
+  .precio {
+    text-align: center;
+    align-self: center;
+    padding-left: 10px;
+    color: colores.$precio;
+  }
 }
 
 .productos-gestion {
   display: flex;
   flex-direction: column;
 
-  .producto-gestion {
+  .producto {
     $borde-color: colores.$base;
     background: colores.$baseD3;
     color: colores.$texto;
@@ -51,7 +69,7 @@
       filter: brightness(0.80);
     }
 
-    &__nombre, &__precio, &__acciones {
+    .nombre, .recio, .acciones {
       border-collapse: collapse;
       text-transform: uppercase;
       border-left: 1px solid $borde-color;
@@ -60,21 +78,21 @@
         border-right: 1px solid $borde-color;
       }
     }
-    &__nombre {
+    .nombre {
       padding: 0.25rem;
       width: 80%;
       padding: 10px 10px;
       -webkit-user-select: text;
       user-select: text;
     }
-    &__precio {
+    .precio {
       padding: 0.25rem;
       width: 16%;
       font-size: 1rem;
       justify-content: center;
       color: colores.$precio;
     }
-    &__acciones {
+    .acciones {
       justify-content: center;
       width: 4%;
     }
@@ -83,27 +101,27 @@
 
 .productos-cuenta {
   width: 100%;
-  .producto-cuenta {
+  .producto {
     width: 100%;
 
-    &__nombre, &__precio, &__cantidad, &__acciones {
+    .nombre, .precio, .cantidad, .acciones {
       padding: 0.5rem 0rem;
       display: inline-flex;
       align-items: center;
     }
 
-    &__nombre {
+    .nombre {
       width: 75%;
     }
 
-    &__precio {
+    .precio {
       font-size: 1rem;
       //padding: 0rem 1rem;
       padding-right: 0.75rem;
       color: colores.$precio;
       text-align: center;
     }
-    &__cantidad {
+    .cantidad {
       text-align: center;
       //padding: 0rem 0.5rem;
       padding: 0rem 0.75rem;
@@ -111,7 +129,7 @@
       color: colores.$cantidad;
       font-size: 1rem;
     }
-    &__acciones {
+    .acciones {
       text-align: center;
     }
   }

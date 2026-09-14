@@ -1,7 +1,8 @@
-import { crearProductoServidor, obtenerProductoServidor} from '@/lib/productosAcciones'
-import ProductosGestion from '@/app/ui/productos-gestion'
+import { crearProductoServidor, obtenerProductosServidor} from '@/lib/productosAcciones'
+
 import styles from './page.module.scss'
 import clsx from 'clsx'
+import ProductosLista from '../ui/productosLista'
 
 const CrearProducto = () => {
   const claseBase = 'productos-gestion__form-contenido'
@@ -15,13 +16,13 @@ const CrearProducto = () => {
 }
  
 export default async function ProductosApp() {
-  const productos: any[] = await obtenerProductoServidor()
+  const productos: any[] = await obtenerProductosServidor()
   const claseBase = 'productos-gestion'
   console.log('productos', productos)
   return (
     <main className={styles[claseBase]}>
       <CrearProducto />
-      <ProductosGestion productos={productos}/>
+      <ProductosLista productos={productos} props={{}}/>
     </main>
   )
 }
